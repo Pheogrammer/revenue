@@ -5,9 +5,10 @@
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.adminlte = {}));
-}(this, (function (exports) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+      (global = global || self, factory(global.adminlte = {}));
+}(this, (function (exports) {
+  'use strict';
 
   /**
    * --------------------------------------------
@@ -120,7 +121,7 @@
           this.show();
         }
       } // Private
-      ;
+        ;
 
       _proto._init = function _init() {
         var _this = this;
@@ -227,7 +228,7 @@
           }
         }
       } // Static
-      ;
+        ;
 
       ControlSidebar._jQueryInterface = function _jQueryInterface(operation) {
         return this.each(function () {
@@ -414,7 +415,7 @@
           }
         }
       } // Private
-      ;
+        ;
 
       _proto._init = function _init() {
         var _this = this;
@@ -461,7 +462,7 @@
       _proto._isFooterFixed = function _isFooterFixed() {
         return $('.main-footer').css('position') === 'fixed';
       } // Static
-      ;
+        ;
 
       Layout._jQueryInterface = function _jQueryInterface(config) {
         if (config === void 0) {
@@ -663,7 +664,7 @@
           }
         }
       } // Private
-      ;
+        ;
 
       _proto._init = function _init() {
         var _this = this;
@@ -686,7 +687,7 @@
         });
         $(Selector.WRAPPER).append(overlay);
       } // Static
-      ;
+        ;
 
       PushMenu._jQueryInterface = function _jQueryInterface(operation) {
         return this.each(function () {
@@ -860,7 +861,7 @@
           this.expand($(treeviewMenu), parentLi);
         }
       } // Private
-      ;
+        ;
 
       _proto._setupListeners = function _setupListeners() {
         var _this3 = this;
@@ -875,7 +876,7 @@
           $(this._config.sidebarButtonSelector).PushMenu('expand');
         }
       } // Static
-      ;
+        ;
 
       Treeview._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
@@ -964,7 +965,7 @@
         var toggledEvent = $.Event(Event.TOGGLED);
         $(this._element).trigger(toggledEvent);
       } // Static
-      ;
+        ;
 
       DirectChat._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
@@ -1071,7 +1072,7 @@
       _proto.unCheck = function unCheck(item) {
         this._config.onUnCheck.call(item);
       } // Private
-      ;
+        ;
 
       _proto._init = function _init() {
         var that = this;
@@ -1080,7 +1081,7 @@
           that.toggle($(event.target));
         });
       } // Static
-      ;
+        ;
 
       TodoList._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
@@ -1290,7 +1291,7 @@
 
         this.maximize();
       } // Private
-      ;
+        ;
 
       _proto._init = function _init(card) {
         var _this3 = this;
@@ -1306,7 +1307,7 @@
           _this3.remove();
         });
       } // Static
-      ;
+        ;
 
       CardWidget._jQueryInterface = function _jQueryInterface(config) {
         var data = $(this).data(DATA_KEY);
@@ -1407,7 +1408,7 @@
       loadOnInit: true,
       responseType: '',
       overlayTemplate: '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>',
-      onLoadStart: function onLoadStart() {},
+      onLoadStart: function onLoadStart() { },
       onLoadDone: function onLoadDone(response) {
         return response;
       }
@@ -1479,7 +1480,7 @@
           this.load();
         }
       } // Static
-      ;
+        ;
 
       CardRefresh._jQueryInterface = function _jQueryInterface(config) {
         var data = $(this).data(DATA_KEY);
@@ -1613,7 +1614,7 @@
           }
         }
       } // Static
-      ;
+        ;
 
       Dropdown._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
@@ -1809,7 +1810,7 @@
           });
         }
       } // Static
-      ;
+        ;
 
       _proto._getContainerId = function _getContainerId() {
         if (this._config.position == Position.TOP_RIGHT) {
@@ -1846,7 +1847,7 @@
           $(this._getContainerId()).removeClass('fixed');
         }
       } // Static
-      ;
+        ;
 
       Toasts._jQueryInterface = function _jQueryInterface(option, config) {
         return this.each(function () {

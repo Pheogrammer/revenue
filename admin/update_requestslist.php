@@ -164,7 +164,7 @@ $update_requests_list->showMessage();
 <input type="hidden" name="t" value="update_requests">
 <div id="gmp_update_requests" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($update_requests_list->TotalRecords > 0 || $update_requests_list->isGridEdit()) { ?>
-<table id="tbl_update_requestslist" class="table ew-table"><!-- .ew-table -->
+<table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable" id="tbl_update_requestslist" class="table ew-table"><!-- .ew-table -->
 <thead>
 	<tr class="ew-table-header">
 <?php

@@ -9,4 +9,3 @@ include_once $RELATIVE_PATH . "autoload.php";
 $Language = new Language();
 $Api = new Api();
 $Api->run();
-?>

@@ -164,7 +164,7 @@ $userlevelpermissions_list->showMessage();
 <input type="hidden" name="t" value="userlevelpermissions">
 <div id="gmp_userlevelpermissions" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($userlevelpermissions_list->TotalRecords > 0 || $userlevelpermissions_list->isGridEdit()) { ?>
-<table id="tbl_userlevelpermissionslist" class="table ew-table"><!-- .ew-table -->
+<table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable" id="tbl_userlevelpermissionslist" class="table ew-table"><!-- .ew-table -->
 <thead>
 	<tr class="ew-table-header">
 <?php

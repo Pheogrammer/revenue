@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -32,19 +33,19 @@ Page_Rendering();
 <?php include_once "header.php"; ?>
 <?php
 //START CUSTOME CODE
-  $dir = 'files';
+$dir = 'files';
 
-  // Check if the directory exists
-  if (file_exists($dir) && is_dir($dir) ) {
-	
-	  // Get the files of the directory as an array
-	  $scan_arr = scandir($dir);
-	  $files_arr = array_diff($scan_arr, array('.','..') );
+// Check if the directory exists
+if (file_exists($dir) && is_dir($dir)) {
 
-	  // echo "<pre>"; print_r( $files_arr ); echo "</pre>";
+	// Get the files of the directory as an array
+	$scan_arr = scandir($dir);
+	$files_arr = array_diff($scan_arr, array('.', '..'));
 
-	  // Get each files of our directory with line break
-	  echo'
+	// echo "<pre>"; print_r( $files_arr ); echo "</pre>";
+
+	// Get each files of our directory with line break
+	echo '
 		  <table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable">
 	<thead>
 		<tr  style="background-color: #28a745;">
@@ -53,30 +54,28 @@ Page_Rendering();
 			<th>ACTION</th>
 		</tr>
 	</thead>';
-	  $i = 1;
-	  foreach ($files_arr as $file) {
+	$i = 1;
+	foreach ($files_arr as $file) {
 		//Get the file path
-		$file_path = "files/".$file;
+		$file_path = "files/" . $file;
 		// Get the file extension
 		$file_ext = pathinfo($file_path, PATHINFO_EXTENSION);
-		if ($file_ext=="zip") {
-			
-		  echo'
+		if ($file_ext == "zip") {
+
+			echo '
 	<tbody>
 		<tr>
-			<td>'.$i++.'</td>
-			<td>'.$file.'</td>
-			<td><a href="'.$file_path.'" class="btn btn-primary btn-flat make_payment">DOWNLOAD</a></td>
+			<td>' . $i++ . '</td>
+			<td>' . $file . '</td>
+			<td><a href="' . $file_path . '" class="btn btn-primary btn-flat make_payment">DOWNLOAD</a></td>
 		</tr>
 	</tbody>';
 		}
-		
-	  }
-	  echo'</table>';
-  }
-  else {
+	}
+	echo '</table>';
+} else {
 	echo "Dorectory does not exists";
-  }
+}
 //END CUSTOME CODE
 ?>
 

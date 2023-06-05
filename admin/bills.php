@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -34,7 +35,7 @@ Page_Rendering();
 	<a href="allBills.php?" class="btn btn-primary btn-flat make_payment">PRINT ALL BILLS
 	</a>
 </div>
-<table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable">
+<table class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable">
 	<thead>
 		<tr>
 			<th class="text-center">#</th>
@@ -45,25 +46,24 @@ Page_Rendering();
 	</thead>
 	<tbody>
 		<?php
-			  $sql="SELECT * FROM client";
-   			  $rows = ExecuteRows($sql);
-			  $i = 1;
-   			  foreach ($rows as $row){					
-			  ?>
-		<tr>
-			<td><?php echo $i++ ?></td>
-			<td><?php echo $row['ClientID']; ?></td>
-			<td><?php echo $row['ClientName']; ?></td>
-			<td class="text-center">
-				<div class="btn-group">
-					<a href="billsPrint.php?Id=<?php echo $row['id']; ?>"
-						class="btn btn-primary btn-flat make_payment">PRINT BILL
-					</a>
-				</div>
-				</div>
-			</td>
-		</tr>
-		<?php }?>
+		$sql = "SELECT * FROM client";
+		$rows = ExecuteRows($sql);
+		$i = 1;
+		foreach ($rows as $row) {
+		?>
+			<tr>
+				<td><?php echo $i++ ?></td>
+				<td><?php echo $row['ClientID']; ?></td>
+				<td><?php echo $row['ClientName']; ?></td>
+				<td class="text-center">
+					<div class="btn-group">
+						<a href="billsPrint.php?Id=<?php echo $row['id']; ?>" class="btn btn-primary btn-flat make_payment">PRINT BILL
+						</a>
+					</div>
+					</div>
+				</td>
+			</tr>
+		<?php } ?>
 	</tbody>
 </table>
 

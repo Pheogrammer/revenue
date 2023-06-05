@@ -22,4 +22,3 @@ spl_autoload_register(PROJECT_NAMESPACE . "Autoloader");
 
 // Global code
 include_once $RELATIVE_PATH . "userfn.php";
-?>

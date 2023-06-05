@@ -164,7 +164,7 @@ $client_list->showMessage();
 <input type="hidden" name="t" value="client">
 <div id="gmp_client" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($client_list->TotalRecords > 0 || $client_list->isGridEdit()) { ?>
-<table id="tbl_clientlist" class="table ew-table"><!-- .ew-table -->
+<table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable" id="tbl_clientlist" class="table ew-table"><!-- .ew-table -->
 <thead>
 	<tr class="ew-table-header">
 <?php

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -36,7 +37,7 @@ $content = '';
 $pageNumber = 1;
 
 $Id = $_GET['Id'];
-$sql="SELECT
+$sql = "SELECT
 `client`.`ClientName`
 , `client`.`ClientID`
 , `client`.`id`
@@ -55,8 +56,8 @@ FROM
 `client`
 LEFT JOIN `property` 
 	ON (`client`.`id` = `property`.`ClientId`) GROUP BY `property`.`PropertyId` ";
-	$rows = ExecuteRows($sql);
-	$i = 1;
+$rows = ExecuteRows($sql);
+$i = 1;
 $content .= '
 		<style>
 			table{
@@ -67,25 +68,25 @@ $content .= '
 			}
 	   </style>
 	<table cellspacing="0" cellpadding="1" width="100%" border="1" style="border-bottom: 0; margin-top:20px;">
-		<tr><th colspan="7" style="background-color:lightgrey">Client Name: '.$rows['ClientName'].'</th></tr>
-		<tr><th colspan="7" style="background-color:lightgrey">Client Number: '.$rows['ClientID'].'</th></tr>
+		<tr><th colspan="7" style="background-color:lightgrey">Client Name: ' . $rows['ClientName'] . '</th></tr>
+		<tr><th colspan="7" style="background-color:lightgrey">Client Number: ' . $rows['ClientID'] . '</th></tr>
 		<tr><th>Property Num</th><th>Property</th><th>Property Value</th><th>Balance BF</th><th>Amount Due</th><th>Amount Paid</th><th>Balance Due</th></tr>';
-	if($rows > 0 ){
-			
-foreach ($rows as $row){
-	 
-$content .= '
-		<tr><td>'.$row['PropertyId'].'</td><td>'.$row['Property'].'</td><td>Tsh '.$row['ChargeableFee'].'</td><td>Tsh '.$row['BalanceBF'].'</td><td>Tsh '.$row['AmountPayable'].'</td><td>Tsh '.$row['AmountPaid'].'</td><td>Tsh '.$row['CurrentBalance'].'</td></tr>
+if ($rows > 0) {
+
+	foreach ($rows as $row) {
+
+		$content .= '
+		<tr><td>' . $row['PropertyId'] . '</td><td>' . $row['Property'] . '</td><td>Tsh ' . $row['ChargeableFee'] . '</td><td>Tsh ' . $row['BalanceBF'] . '</td><td>Tsh ' . $row['AmountPayable'] . '</td><td>Tsh ' . $row['AmountPaid'] . '</td><td>Tsh ' . $row['CurrentBalance'] . '</td></tr>
 		';
 	}
-}else{
-$content .= '
+} else {
+	$content .= '
 		<tr><td colspan="7"><center>No Data Found For Thsis Client</td></tr>
 		';
-}	
+}
 
 set_time_limit(300000);
-ini_set('memory_limit','2048M');
+ini_set('memory_limit', '2048M');
 // Load Dompdf
 use Dompdf\Dompdf;
 
@@ -93,7 +94,7 @@ use Dompdf\Dompdf;
 ob_get_clean();
 
 // File to be downloaded
-$file = 'Property-Bills-For-'.date('d-m-Y').'.pdf';
+$file = 'Property-Bills-For-' . date('d-m-Y') . '.pdf';
 
 // HTML to convert to PDF
 $html = "";
@@ -117,8 +118,8 @@ $dompdf->render();
 $dompdf->stream($file);
 $output = $dompdf->output();
 //Save pdf TrialBalance to file
-file_put_contents("files/".$file, $output);
-$document->stream("Property-Bills", array("Attachment"=>0));
+file_put_contents("files/" . $file, $output);
+$document->stream("Property-Bills", array("Attachment" => 0));
 
 //========Custome Code End======================
 ?>

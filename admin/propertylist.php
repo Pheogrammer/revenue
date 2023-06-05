@@ -177,7 +177,7 @@ $property_list->showMessage();
 <?php } ?>
 <div id="gmp_property" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($property_list->TotalRecords > 0 || $property_list->isGridEdit()) { ?>
-<table id="tbl_propertylist" class="table ew-table"><!-- .ew-table -->
+<table  class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable" id="tbl_propertylist" class="table ew-table"><!-- .ew-table -->
 <thead>
 	<tr class="ew-table-header">
 <?php

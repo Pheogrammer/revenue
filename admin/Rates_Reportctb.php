@@ -216,7 +216,7 @@ while ($Rates_Report_crosstab->GroupCount <= count($Rates_Report_crosstab->Group
 <?php } ?>
 <!-- Report grid (begin) -->
 <div id="gmp_Rates_Report" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
-<table class="<?php echo $Rates_Report_crosstab->ReportTableClass ?>">
+<table    class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable"class="<?php echo $Rates_Report_crosstab->ReportTableClass ?>">
 <thead>
 	<!-- Table header -->
 	<tr class="ew-table-header">

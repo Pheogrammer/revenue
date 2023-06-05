@@ -164,7 +164,7 @@ $system_settings_list->showMessage();
 <input type="hidden" name="t" value="system_settings">
 <div id="gmp_system_settings" class="<?php echo ResponsiveTableClass() ?>card-body ew-grid-middle-panel">
 <?php if ($system_settings_list->TotalRecords > 0 || $system_settings_list->isGridEdit()) { ?>
-<table id="tbl_system_settingslist" class="table ew-table"><!-- .ew-table -->
+<table   class="table table-striped table-bordered" cellspacing="0" width="100%" id="myDataTable" id="tbl_system_settingslist" class="table ew-table"><!-- .ew-table -->
 <thead>
 	<tr class="ew-table-header">
 <?php
