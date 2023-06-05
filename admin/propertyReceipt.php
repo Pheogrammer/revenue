@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -48,19 +49,19 @@ $content .= '
 			}
 	   </style>
 	<table cellspacing="0" cellpadding="1" width="100%" border="1" style="border-bottom: 0; margin-top:20px;">
-		<tr><th colspan="4" style="background-color:lightgrey">LedgerAccount: '.$row['ClientId'].'</th></tr>
+		<tr><th colspan="4" style="background-color:lightgrey">LedgerAccount: ' . $row['ClientId'] . '</th></tr>
 			<tr style="background-color:lightgrey"><th colspan="2">OpeningBalance:</th> <th colspan="2">ClosingBalance:</th></tr>
 			<tr><th>AccountName</th><th>ReferenceNumber</th><th>Debit</th><th>Credit</th></tr>';
-			
- foreach($rows as $row){
-	 
-$content .= '
-		<tr><td>'.$row['ClientId'].'</td><td>'.$row['ClientId'].'</td><td>'.$row['ClientId'].'</td><td>'.$row['ClientId'].'</td></tr>
+
+foreach ($rows as $row) {
+
+	$content .= '
+		<tr><td>' . $row['ClientId'] . '</td><td>' . $row['ClientId'] . '</td><td>' . $row['ClientId'] . '</td><td>' . $row['ClientId'] . '</td></tr>
 		';
-	}
+}
 
 set_time_limit(300000);
-ini_set('memory_limit','2048M');
+ini_set('memory_limit', '2048M');
 // Load Dompdf
 use Dompdf\Dompdf;
 
@@ -92,8 +93,8 @@ $dompdf->render();
 $dompdf->stream($file);
 $output = $dompdf->output();
 //Save pdf TrialBalance to file
-file_put_contents("files/".$file, $output);
-$document->stream("RCS Receipt", array("Attachment"=>0));
+file_put_contents("files/" . $file, $output);
+$document->stream("RCS Receipt", array("Attachment" => 0));
 
 //========Custome Code End======================
 ?>

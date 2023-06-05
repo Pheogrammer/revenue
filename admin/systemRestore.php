@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -30,24 +31,23 @@ SetClientVar("login", LoginStatus());
 Page_Rendering();
 ?>
 <?php include_once "header.php"; ?>
-<?php //CUSTOME CODE STARTED ?>
-<form method="post" action="" enctype="multipart/form-data"
-	id="frm-restore">
-	<input type="hidden" name="token" value="<?= CurrentPage()->Token ?>" >
-		<div>Choose Backup File</div>
-		<div>
-			<input type="file" name="backup_file" class="input-file" />
-		</div>
+<?php //CUSTOME CODE STARTED 
+?>
+<form method="post" action="" enctype="multipart/form-data" id="frm-restore">
+	<input type="hidden" name="token" value="<?= CurrentPage()->Token ?>">
+	<div>Choose Backup File</div>
 	<div>
-		<input type="submit" name="restore" value="Restore"
-			class="btn btn-primary"/>
+		<input type="file" name="backup_file" class="input-file" />
+	</div>
+	<div>
+		<input type="submit" name="restore" value="Restore" class="btn btn-primary" />
 	</div>
 </form>
 <?php
 
-if (! empty($_FILES)) {
+if (!empty($_FILES)) {
 	// Validating SQL file type by extensions
-	if (! in_array(strtolower(pathinfo($_FILES["backup_file"]["name"], PATHINFO_EXTENSION)), array(
+	if (!in_array(strtolower(pathinfo($_FILES["backup_file"]["name"], PATHINFO_EXTENSION)), array(
 		"sql"
 	))) {
 		$response = array(
@@ -66,28 +66,28 @@ function restoreMysqlDB($filePath, $conn)
 {
 	$sql = '';
 	$error = '';
-	
+
 	if (file_exists($filePath)) {
 		$lines = file($filePath);
-		
+
 		foreach ($lines as $line) {
-			
+
 			// Ignoring comments from the SQL script
 			if (substr($line, 0, 2) == '--' || $line == '') {
 				continue;
 			}
-			
+
 			$sql .= $line;
-			
-			if (substr(trim($line), - 1, 1) == ';') {
+
+			if (substr(trim($line), -1, 1) == ';') {
 				$result = mysqli_query($conn, $sql);
-				if (! $result) {
+				if (!$result) {
 					$error .= mysqli_error($conn) . "\n";
 				}
 				$sql = '';
 			}
 		} // end foreach
-		
+
 		if ($error) {
 			$response = array(
 				"type" => "error",
@@ -101,59 +101,59 @@ function restoreMysqlDB($filePath, $conn)
 		}
 		exec('rm ' . $filePath);
 	} // end if file exists
-	
+
 	return $response;
 }
 
 ?>
 
 <style>
-#frm-restore {
-	background: #aee5ef;
-	padding: 20px;
-}
+	#frm-restore {
+		background: #aee5ef;
+		padding: 20px;
+	}
 
-.form-row {
-	margin-bottom: 20px;
-}
+	.form-row {
+		margin-bottom: 20px;
+	}
 
-.input-file {
-	background: #FFF;
-	padding: 10px;
-	margin-top: 5px;
-}
+	.input-file {
+		background: #FFF;
+		padding: 10px;
+		margin-top: 5px;
+	}
 
-.btn-action {
-	background: #333;
-	border: 0;
-	padding: 10px 40px;
-	color: #FFF;
-	border-radius: 2px;
-}
+	.btn-action {
+		background: #333;
+		border: 0;
+		padding: 10px 40px;
+		color: #FFF;
+		border-radius: 2px;
+	}
 
-.response {
-	padding: 10px;
-	margin-bottom: 20px;
-	border-radius: 2px;
-}
+	.response {
+		padding: 10px;
+		margin-bottom: 20px;
+		border-radius: 2px;
+	}
 
-.error {
-	background: #fbd3d3;
-	border: #efc7c7 1px solid;
-}
+	.error {
+		background: #fbd3d3;
+		border: #efc7c7 1px solid;
+	}
 
-.success {
-	background: #cdf3e6;
-	border: #bee2d6 1px solid;
-}
+	.success {
+		background: #cdf3e6;
+		border: #bee2d6 1px solid;
+	}
 </style>
 
 <?php
-if (! empty($response)) {
-	?>
-<div class="response <?php echo $response["type"]; ?>">
-<?php echo nl2br($response["message"]); ?>
-</div>
+if (!empty($response)) {
+?>
+	<div class="response <?php echo $response["type"]; ?>">
+		<?php echo nl2br($response["message"]); ?>
+	</div>
 <?php
 }
 //CUSTOME CODE ENDED 

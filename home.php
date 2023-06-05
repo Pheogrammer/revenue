@@ -15,16 +15,16 @@
             <div class="info-box-content">
                 <span class="info-box-text">Balance Due</span>
                 <span class="info-box-number">
-                    <?php 
-                  $qry=$conn->query("SELECT FORMAT(SUM(property.CurrentBalance),2) AS CurrentBalance FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
-                  $r=$qry->fetch_array();
-                  if($r['CurrentBalance'] == NULL){
-                    echo 'Tsh 0.00';
-                  }else{
-                    echo 'Tsh '.$r['CurrentBalance'];
-                  }
-                  
-                   ?>
+                    <?php
+                    $qry = $conn->query("SELECT FORMAT(SUM(property.CurrentBalance),2) AS CurrentBalance FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
+                    $r = $qry->fetch_array();
+                    if ($r['CurrentBalance'] == NULL) {
+                        echo 'Tsh 0.00';
+                    } else {
+                        echo 'Tsh ' . $r['CurrentBalance'];
+                    }
+
+                    ?>
                 </span>
             </div>
         </div>
@@ -36,10 +36,10 @@
             <div class="info-box-content">
                 <span class="info-box-text">Total Properties</span>
                 <span class="info-box-number">
-                    <?php 
-                  $qry = $conn->query("SELECT COUNT(property.ClientId) AS  propertyNum FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
-                  $rs = $qry->fetch_array();
-                  echo $rs['propertyNum'];?>
+                    <?php
+                    $qry = $conn->query("SELECT COUNT(property.ClientId) AS  propertyNum FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
+                    $rs = $qry->fetch_array();
+                    echo $rs['propertyNum']; ?>
                 </span>
             </div>
         </div>
@@ -51,14 +51,14 @@
             <div class="info-box-content">
                 <span class="info-box-text">Payments Made</span>
                 <span class="info-box-number">
-                    <?php  
-                  $qry=$conn->query("SELECT FORMAT(SUM(property.AmountPaid),2) AS AmountPaid FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
-                  $r=$qry->fetch_array();
-                  if($r['AmountPaid'] == NULL){
-                    echo 'Tsh 0.00';
-                  }else{
-                    echo 'Tsh '.$r['AmountPaid'];
-                  }?>
+                    <?php
+                    $qry = $conn->query("SELECT FORMAT(SUM(property.AmountPaid),2) AS AmountPaid FROM property LEFT JOIN client On property.ClientId = client.id WHERE client.id = '$SessionId' ");
+                    $r = $qry->fetch_array();
+                    if ($r['AmountPaid'] == NULL) {
+                        echo 'Tsh 0.00';
+                    } else {
+                        echo 'Tsh ' . $r['AmountPaid'];
+                    } ?>
                 </span>
             </div>
         </div>

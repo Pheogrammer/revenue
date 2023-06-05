@@ -1,19 +1,19 @@
 <?php include('db_connect.php'); ?>
 <!-- Info boxes -->
 <div class="col-12">
-    <div class="card">
-        <div class="card-body">
-            Welcome! <b><?php echo $_SESSION['login_name'] ?>!</b>
-        </div>
-    </div>
+	<div class="card">
+		<div class="card-body">
+			Welcome! <b><?php echo $_SESSION['login_name'] ?>!</b>
+		</div>
+	</div>
 </div>
 <i>Make You Payment Here, Save or print receipt. A copy will be sent to your email.</i>
 <div class="row col-8">
 
-    <?php
+	<?php
 	require_once 'vendor/autoload.php';
-	
-	if(ISSET($_POST['pay'])){
+
+	if (isset($_POST['pay'])) {
 		$ClientProperty = $_POST['id'];
 		$ClientId = $_POST['clierntId'];
 		$propertyUse = $_POST['propertyUse'];
@@ -25,18 +25,18 @@
 
 		$pay = $conn->query("INSERT INTO property_revenu(`ClientId`,  `ClientProperty`, `PropertyUse`, `PropertyId`,`AmountPayable`, `AmountPaid`, `Balance`)
 		  VALUES ('$ClientId', '$ClientProperty', '$propertyUse', '$PropertyId',  '$AmountPayable', '$AmountPaid', '$Balance')");
-		  $paymentId = $conn->insert_id;
+		$paymentId = $conn->insert_id;
 		//$rs2 = $qry2->fetch_array();
 		$get = $conn->query("SELECT property.AmountPaid, property.CurrentBalance, client.ClientName, client.Email, client.ClientID, client.id, property.Property FROM client LEFT JOIN property ON client.id = property.clientId WHERE client.id = '$ClientId' ");
 		$result = $get->fetch_array();
-		
+
 		$newCurrentBalance = $result['CurrentBalance'] - $AmountPaid;
 		$totalAmountPaid = $AmountPaid + $result['AmountPaid'];
 		//echo $AmountPaid.' + '.$result['AmountPaid'].' = '.$totalAmountPaid;
 
-		if($result){
-		$update = $conn->query("UPDATE property SET AmountPaid = '$totalAmountPaid', CurrentBalance = $newCurrentBalance WHERE id = '$ClientProperty' ");
-/*Send SMS after payment is made
+		if ($result) {
+			$update = $conn->query("UPDATE property SET AmountPaid = '$totalAmountPaid', CurrentBalance = $newCurrentBalance WHERE id = '$ClientProperty' ");
+			/*Send SMS after payment is made
 if($_POST['cardNum']==NULL){
     $MessageBird = new \MessageBird\Client('GskgXOv2RNtBJQvhDjXgnTqZO');
 	$Message = new \MessageBird\Objects\Message();
@@ -53,30 +53,30 @@ if($_POST['cardNum']==NULL){
   
     $MessageBird->messages->create($Message);
 }*/
-	      
-		  $to = $result['Email'];
-		  $subject = 'REVENUE DEPARTMENT';
-		  $from = 'revenuedepartments@rcs.com';
-			
-		  // To send HTML mail, the Content-type header must be set
-		  $headers  = 'MIME-Version: 1.0' . "\r\n";
-		  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			
-		  // Create email headers
-		  $headers .= 'From: '.$from."\r\n".
-			'Reply-To: '.$from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
-			
-		  // Compose a simple HTML email message
-		  $message = '<html><body style="">';
-		  $message .= '<h3 style="color:;">Thankyou for you Payment! '.$result['ClientName'].' - '.$result['ClientID'].'</h3>';
-		  $message .= '<div style="font-size:18px;"><p>You have made a payment for Property Num. '.$PropertyId.'<p/>
-		  PROPERTY DESC.: '.$result['Property'].' <br/>
-		  PROPERTY NUM.: '.$PropertyId.'.<br/>
-		  PAYMENT NUM.: '.$paymentId.'.<br/>
-		  AMOUNT DUE.: '.$AmountPayable.'.<br/>
-		  AMOUNT PAID.: Tsh '.$AmountPaid.'<br/>
-		  BALANCE DUE.: Tsh '.$Balance.'<br/>
+
+			$to = $result['Email'];
+			$subject = 'REVENUE DEPARTMENT';
+			$from = 'revenuedepartments@rcs.com';
+
+			// To send HTML mail, the Content-type header must be set
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+			// Create email headers
+			$headers .= 'From: ' . $from . "\r\n" .
+				'Reply-To: ' . $from . "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+
+			// Compose a simple HTML email message
+			$message = '<html><body style="">';
+			$message .= '<h3 style="color:;">Thankyou for you Payment! ' . $result['ClientName'] . ' - ' . $result['ClientID'] . '</h3>';
+			$message .= '<div style="font-size:18px;"><p>You have made a payment for Property Num. ' . $PropertyId . '<p/>
+		  PROPERTY DESC.: ' . $result['Property'] . ' <br/>
+		  PROPERTY NUM.: ' . $PropertyId . '.<br/>
+		  PAYMENT NUM.: ' . $paymentId . '.<br/>
+		  AMOUNT DUE.: ' . $AmountPayable . '.<br/>
+		  AMOUNT PAID.: Tsh ' . $AmountPaid . '<br/>
+		  BALANCE DUE.: Tsh ' . $Balance . '<br/>
 		  <br/>
 		  <hr style="border-style:dotted; border-color: black;" />
 			  <center>&copy;2021, LAND/PROPERTY RATES DEPARTMENT</center>
@@ -84,30 +84,30 @@ if($_POST['cardNum']==NULL){
 		  <i>
 			  <center>You can print this receipt and present it as proof od payment. THANK YOU.</center>
 		  </i>';
-		  $message .= '</div></body></html>';
-			
-		  // Sending email
-		  if(mail($to, $subject, $message, $headers)){
-			echo '<span style="color:green;text-align:center; font-weight: bold;">Success!. A receipt has been Emailed.</span>';
-		  } else{
-			echo '<span style="color:red;text-align:center; font-weight: bold;">Error! Sending Email Failed</span>';
-		  }
-		}else{
+			$message .= '</div></body></html>';
+
+			// Sending email
+			if (mail($to, $subject, $message, $headers)) {
+				echo '<span style="color:green;text-align:center; font-weight: bold;">Success!. A receipt has been Emailed.</span>';
+			} else {
+				echo '<span style="color:red;text-align:center; font-weight: bold;">Error! Sending Email Failed</span>';
+			}
+		} else {
 			echo '<span style="color:red;text-align:center; font-weight: bold;">System Error! Faile to Pay.</span>';
 		}
 	}
-                if(ISSET($_POST['step2'])){
-					$proId = $_POST['id'];
-					$qry = $conn->query("SELECT * FROM property  WHERE id = '$proId' ");
-					$rs = $qry->fetch_array();
-					if($_POST['paymethode'] == '1'){
-					  echo'
+	if (isset($_POST['step2'])) {
+		$proId = $_POST['id'];
+		$qry = $conn->query("SELECT * FROM property  WHERE id = '$proId' ");
+		$rs = $qry->fetch_array();
+		if ($_POST['paymethode'] == '1') {
+			echo '
 					  <span style="color:green;text-align:center; font-weight: bold;">Youre making payment Via Mobile Money.</span>
 				  <div class="container-fluid">
 					<form action="" id="make_payment" method="POST">
-					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="'.$rs['id'].'" readonly>
-					  <input type="hidden" class="form-control form-control-sm" name="clierntId" id="clierntId" value="'.$rs['ClientId'].'" readonly>	
-					  <input type="hidden" class="form-control form-control-sm" name="propertyUse" id="propertyUse" value="'.$rs['PropertyUse'].'" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="' . $rs['id'] . '" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="clierntId" id="clierntId" value="' . $rs['ClientId'] . '" readonly>	
+					  <input type="hidden" class="form-control form-control-sm" name="propertyUse" id="propertyUse" value="' . $rs['PropertyUse'] . '" readonly>
 					  <input type="hidden" max-length="16" min-length="12" class="form-control form-control-sm" name="cardNum" id="cardNum" required placeholder="Enter Credit Number to use">
 					  
 					  <div class="form-group">
@@ -117,15 +117,15 @@ if($_POST['cardNum']==NULL){
 					  </div>		  
   
 						<label for="PropertyId" class="control-label">Property Number</label>
-					  <input type="text" class="form-control form-control-sm" name="PropertyId" value="'.$rs['PropertyId'].'" readonly>
+					  <input type="text" class="form-control form-control-sm" name="PropertyId" value="' . $rs['PropertyId'] . '" readonly>
 					  <div id="msg" class="form-group"></div>
 					  <div class="form-group">
 						<label for="property" class="control-label">Property Description</label>
-						<input type="text" class="form-control form-control-sm" name="property" id="property" value="'.$rs['Property'].'" readonly>					  
+						<input type="text" class="form-control form-control-sm" name="property" id="property" value="' . $rs['Property'] . '" readonly>					  
 					  </div>
 					  <div class="form-group">
 						<label for="Balance" class="control-label">Outstanding Balance(Tsh)</label>
-						<input type="number" class="form-control form-control-sm" name="Balance" id="Balance" value="'.$rs['CurrentBalance'].'" readonly>
+						<input type="number" class="form-control form-control-sm" name="Balance" id="Balance" value="' . $rs['CurrentBalance'] . '" readonly>
 					  </div>
 					  <div class="form-group">
 						<label for="amountToPay" class="control-label">Amout to pay(Tsh)</label>
@@ -138,19 +138,18 @@ if($_POST['cardNum']==NULL){
 					  <div class="card-footer border-top border-info">
 						<div class="d-flex w-100 justify-content-center align-items-center">
 						  <button type="submit" class="btn btn-flat  bg-gradient-primary mx-2" name="pay">PAY</button>
-						  <a href="./index.php?page=step1&proId='.$rs['PropertyId'].'"><button type="button" class="btn btn-flat  bg-gradient-warning mx-2">BACK</button></a>
+						  <a href="./index.php?page=step1&proId=' . $rs['PropertyId'] . '"><button type="button" class="btn btn-flat  bg-gradient-warning mx-2">BACK</button></a>
 						</div>
 					</form>
 				  </div>';
-
-					}else{
-					  echo'
+		} else {
+			echo '
 					  <span style="color:green;text-align:center; font-weight: bold;">Youre making payment Via Visa Card.</span>
 				  <div class="container-fluid">
 					<form action="" id="make_payment" method="POST">
-					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="'.$rs['id'].'" readonly>
-					  <input type="hidden" class="form-control form-control-sm" name="clierntId" id="clierntId" value="'.$rs['ClientId'].'" readonly>	
-					  <input type="hidden" class="form-control form-control-sm" name="propertyUse" id="propertyUse" value="'.$rs['PropertyUse'].'" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="' . $rs['id'] . '" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="clierntId" id="clierntId" value="' . $rs['ClientId'] . '" readonly>	
+					  <input type="hidden" class="form-control form-control-sm" name="propertyUse" id="propertyUse" value="' . $rs['PropertyUse'] . '" readonly>
 					  
 					  <div class="form-group">
 						<label for="amountToPay" class="control-label">Mobile Number (Use Correct mobile for SMS receipt.)</label>
@@ -163,15 +162,15 @@ if($_POST['cardNum']==NULL){
 					  </div>
   
 						<label for="PropertyId" class="control-label">Property Number</label>
-					  <input type="text" class="form-control form-control-sm" name="PropertyId" value="'.$rs['PropertyId'].'" readonly>
+					  <input type="text" class="form-control form-control-sm" name="PropertyId" value="' . $rs['PropertyId'] . '" readonly>
 					  <div id="msg" class="form-group"></div>
 					  <div class="form-group">
 						<label for="property" class="control-label">Property Description</label>
-						<input type="text" class="form-control form-control-sm" name="property" id="property" value="'.$rs['Property'].'" readonly>					  
+						<input type="text" class="form-control form-control-sm" name="property" id="property" value="' . $rs['Property'] . '" readonly>					  
 					  </div>
 					  <div class="form-group">
 						<label for="Balance" class="control-label">Outstanding Balance(Tsh)</label>
-						<input type="number" class="form-control form-control-sm" name="Balance" id="Balance" value="'.$rs['CurrentBalance'].'" readonly>
+						<input type="number" class="form-control form-control-sm" name="Balance" id="Balance" value="' . $rs['CurrentBalance'] . '" readonly>
 					  </div>
 					  <div class="form-group">
 						<label for="amountToPay" class="control-label">Amout to pay(Tsh)</label>
@@ -184,21 +183,20 @@ if($_POST['cardNum']==NULL){
 					  <div class="card-footer border-top border-info">
 						<div class="d-flex w-100 justify-content-center align-items-center">
 						  <button type="submit" class="btn btn-flat  bg-gradient-primary mx-2" name="pay"><i class="fa fa-thumbssss-up"></i> PAY</button>
-						  <a href="./index.php?page=step1&proId='.$rs['PropertyId'].'"><button type="button" class="btn btn-flat  bg-gradient-warning mx-2"><i class="fa fa-angle-double-left"> </i> BACK</button></a>
+						  <a href="./index.php?page=step1&proId=' . $rs['PropertyId'] . '"><button type="button" class="btn btn-flat  bg-gradient-warning mx-2"><i class="fa fa-angle-double-left"> </i> BACK</button></a>
 						</div>
 					</form>
 				  </div>';
+		}
+	}
 
-					} 
-				} 
-	            
-            ?>
+	?>
 </div>
 <script>
-function reSum() {
-    var num1 = parseInt(document.getElementById("Balance").value);
-    var num2 = parseInt(document.getElementById("amountToPay").value);
-    document.getElementById("CurrentBalance").value = +num1 - num2;
+	function reSum() {
+		var num1 = parseInt(document.getElementById("Balance").value);
+		var num2 = parseInt(document.getElementById("amountToPay").value);
+		document.getElementById("CurrentBalance").value = +num1 - num2;
 
-}
+	}
 </script>

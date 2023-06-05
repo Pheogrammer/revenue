@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -6,7 +7,7 @@ include_once "autoload.php";
 
 // Session
 if (session_status() !== PHP_SESSION_ACTIVE)
-	\Delight\Cookie\Session::start(Config("COOKIE_SAMESITE")); // Init session data
+    \Delight\Cookie\Session::start(Config("COOKIE_SAMESITE")); // Init session data
 
 // Output buffering
 ob_start();
@@ -45,25 +46,24 @@ Page_Rendering();
     </thead>
     <tbody>
         <?php
-			  $sql="SELECT * FROM client";
-   			  $rows = ExecuteRows($sql);
-			  $i = 1;
-   			  foreach ($rows as $row){					
-			  ?>
-        <tr>
-            <td><?php echo $i++ ?></td>
-            <td><?php echo $row['ClientID']; ?></td>
-            <td><?php echo $row['ClientName']; ?></td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a href="printInvoice.php?Id=<?php echo $row['id']; ?>"
-                        class="btn btn-primary btn-flat make_payment">PRINT BILL
-                    </a>
-                </div>
-                </div>
-            </td>
-        </tr>
-        <?php }?>
+        $sql = "SELECT * FROM client";
+        $rows = ExecuteRows($sql);
+        $i = 1;
+        foreach ($rows as $row) {
+        ?>
+            <tr>
+                <td><?php echo $i++ ?></td>
+                <td><?php echo $row['ClientID']; ?></td>
+                <td><?php echo $row['ClientName']; ?></td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a href="printInvoice.php?Id=<?php echo $row['id']; ?>" class="btn btn-primary btn-flat make_payment">PRINT BILL
+                        </a>
+                    </div>
+                    </div>
+                </td>
+            </tr>
+        <?php } ?>
     </tbody>
 </table>
 

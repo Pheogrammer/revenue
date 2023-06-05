@@ -16707,4 +16707,3 @@ function CheckHtml($html) {
 	}
 	return $html;
 }
-?>

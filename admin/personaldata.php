@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPMaker2020\revenue;
 
 // Autoload
@@ -38,21 +39,23 @@ $personaldata->showMessage();
 		<i class="icon fas fa-ban"></i><?php echo $Language->phrase("PersonalDataWarning") ?>
 	</div>
 	<?php if (!EmptyString($personaldata->getFailureMessage())) { ?>
-	<div class="text-danger">
-		<ul>
-			<li><?php echo $personaldata->getFailureMessage() ?></li>
-		</ul>
-	</div>
+		<div class="text-danger">
+			<ul>
+				<li><?php echo $personaldata->getFailureMessage() ?></li>
+			</ul>
+		</div>
 	<?php } ?>
 	<div>
 		<form id="delete-user" method="post" class="form-group">
-<?php if ($Page->CheckToken) { ?>
-<input type="hidden" name="<?php echo Config("TOKEN_NAME") ?>" value="<?php echo $Page->Token ?>">
-<?php } ?>
+			<?php if ($Page->CheckToken) { ?>
+				<input type="hidden" name="<?php echo Config("TOKEN_NAME") ?>" value="<?php echo $Page->Token ?>">
+			<?php } ?>
 			<div class="text-danger"></div>
 			<div class="form-group">
 				<label id="label" class="control-label ew-label"><?php echo $Language->phrase("Password") ?></label>
-				<div class="input-group"><input type="password" name="password" id="password" autocomplete="current-password" class="form-control ew-control" placeholder="<?php echo $Language->phrase("Password") ?>"><div class="input-group-append"><button type="button" class="btn btn-default ew-toggle-password" onclick="ew.togglePassword(event);"><i class="fas fa-eye"></i></button></div></div>
+				<div class="input-group"><input type="password" name="password" id="password" autocomplete="current-password" class="form-control ew-control" placeholder="<?php echo $Language->phrase("Password") ?>">
+					<div class="input-group-append"><button type="button" class="btn btn-default ew-toggle-password" onclick="ew.togglePassword(event);"><i class="fas fa-eye"></i></button></div>
+				</div>
 			</div>
 			<button class="btn btn-primary" type="submit"><?php echo $Language->phrase("CloseAccountBtn") ?></button>
 		</form>

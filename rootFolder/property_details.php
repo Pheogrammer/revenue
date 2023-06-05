@@ -1,13 +1,13 @@
 <style>
-.table td{
-	text-align: left;
-}
+   .table td {
+      text-align: left;
+   }
 </style>
 
-<?php include'db_connect.php';
-     
-	 $PropertyId = $_GET['proId'];
-	$qry = $conn->query("SELECT
+<?php include 'db_connect.php';
+
+$PropertyId = $_GET['proId'];
+$qry = $conn->query("SELECT
 	`property`.`id`
    ,`property`.`Property`
    , `property`.`PropertyId`
@@ -31,26 +31,62 @@ FROM
 	   ON (`charges`.`ChargeDesc` = `property`.`ChargeGroup`)
    LEFT JOIN `charge_group` 
 	   ON (`charges`.`ChargeGroup` = `charge_group`.`ChargeGroupCode`) WHERE `property`.`PropertyId` = '$PropertyId' AND client.id = '$SessionId' ");
-	$row= $qry->fetch_assoc();
+$row = $qry->fetch_assoc();
 ?>
 <div class="col-lg-12">
-	<div class="card card-outline card-primary">
-		<div class="card-body">
-<table style="width: " class="table">
-<tr><th>PROPERTY ID#</th><td><?php  echo $row['PropertyId'];?></td></tr>
-<tr><th>PROPERT</th><td><?php echo $row['Property'];?></td></tr>
-<tr><th>PROPETY USE</th><td><?php echo $row['PropertyUse'];?></td></tr>
-<tr><th>DATE REGISTERED</th><td><?php echo $row['date'];?></td></tr>
-<tr><th>PROPERTY VALUE</th><td>Tsh <?php echo $row['ChargeableFee'];?></td></tr>
-<tr><th>BALANCE BF</th><td>Tsh <?php echo $row['BalanceBF'];?></td></tr>
-<tr><th>AMOUNT DUE</th><td>Tsh <?php echo $row['AmountPayable'];?></td></tr>
-<tr><th>AMOUNT CLEARED</th><td>Tsh <?php echo $row['AmountPaid'];?></td></tr>
-<tr><th>CURRENT BALANCE DUE</th><td>Tsh <?php echo $row['CurrentBalance'];?></td></tr>
-<tr><th>PROPERTY LOCATION</th><td><?php echo $row['Location'];?></td></tr>
-<tr><th>PHYSICAL ADDRESS</th><td><?php echo $row['PhysicalAddress'];?></td></tr>
-<tr><th>PROPERTY DESC.</th><td><?php echo $row['Description'];?></td></tr>
-</table>
-		
-		</div>
-	</div>
+   <div class="card card-outline card-primary">
+      <div class="card-body">
+         <table style="width: " class="table">
+            <tr>
+               <th>PROPERTY ID#</th>
+               <td><?php echo $row['PropertyId']; ?></td>
+            </tr>
+            <tr>
+               <th>PROPERT</th>
+               <td><?php echo $row['Property']; ?></td>
+            </tr>
+            <tr>
+               <th>PROPETY USE</th>
+               <td><?php echo $row['PropertyUse']; ?></td>
+            </tr>
+            <tr>
+               <th>DATE REGISTERED</th>
+               <td><?php echo $row['date']; ?></td>
+            </tr>
+            <tr>
+               <th>PROPERTY VALUE</th>
+               <td>Tsh <?php echo $row['ChargeableFee']; ?></td>
+            </tr>
+            <tr>
+               <th>BALANCE BF</th>
+               <td>Tsh <?php echo $row['BalanceBF']; ?></td>
+            </tr>
+            <tr>
+               <th>AMOUNT DUE</th>
+               <td>Tsh <?php echo $row['AmountPayable']; ?></td>
+            </tr>
+            <tr>
+               <th>AMOUNT CLEARED</th>
+               <td>Tsh <?php echo $row['AmountPaid']; ?></td>
+            </tr>
+            <tr>
+               <th>CURRENT BALANCE DUE</th>
+               <td>Tsh <?php echo $row['CurrentBalance']; ?></td>
+            </tr>
+            <tr>
+               <th>PROPERTY LOCATION</th>
+               <td><?php echo $row['Location']; ?></td>
+            </tr>
+            <tr>
+               <th>PHYSICAL ADDRESS</th>
+               <td><?php echo $row['PhysicalAddress']; ?></td>
+            </tr>
+            <tr>
+               <th>PROPERTY DESC.</th>
+               <td><?php echo $row['Description']; ?></td>
+            </tr>
+         </table>
+
+      </div>
+   </div>
 </div>

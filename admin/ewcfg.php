@@ -3,6 +3,7 @@
 /**
  * PHPMaker 2020 configuration file
  */
+
 namespace PHPMaker2020\revenue;
 
 // Prerequisite
@@ -968,7 +969,7 @@ $CONFIG = [
 	 * 1 - no multi value
 	 * 2 - AND all multi values
 	 * 3 - OR all multi values
-	*/
+	 */
 	"SEARCH_MULTI_VALUE_OPTION" => 3,
 
 	// Quick search
@@ -1015,7 +1016,7 @@ $CONFIG = [
 	"CONSENT_COOKIE_NAME" => "ConsentCookie", // Consent cookie name
 	"COOKIE_CONSENT_CLASS" => "toast-body bg-secondary", // CSS class name for cookie consent
 	"COOKIE_CONSENT_BUTTON_CLASS" => "btn btn-dark btn-sm", // CSS class name for cookie consent buttons
-	"COOKIE_EXPIRY_TIME" => time() + 365*24*60*60, // Change cookie expiry time here
+	"COOKIE_EXPIRY_TIME" => time() + 365 * 24 * 60 * 60, // Change cookie expiry time here
 	"COOKIE_HTTP_ONLY" => TRUE,
 	"COOKIE_SECURE" => FALSE,
 	"COOKIE_SAMESITE" => "Lax",
@@ -1094,7 +1095,7 @@ $CONFIG = [
  * Note: DO NOT CHANGE THE FOLLOWING $* VARIABLES!
  * If you want to use custom settings, customize the locale files for FormatCurrency/Number/Percent functions.
  * Also read http://www.php.net/localeconv for description of the constants
-*/
+ */
 $DECIMAL_POINT = ".";
 $THOUSANDS_SEP = ",";
 $CURRENCY_SYMBOL = "$";
@@ -1142,7 +1143,7 @@ date_default_timezone_set($TIME_ZONE);
  * Global variables
  */
 $CONNECTIONS = []; // Connections
-$LANGUAGES = [["en","","english.xml"]];
+$LANGUAGES = [["en", "", "english.xml"]];
 $Conn = NULL; // Primary connection
 $Page = NULL; // Page
 $UserTable = NULL; // User table

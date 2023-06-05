@@ -62,4 +62,3 @@ $sideMenu->addMenuItem(32, "mci_Revenue_Reports", $MenuLanguage->MenuPhrase("32"
 $sideMenu->addMenuItem(125, "mi_billing_period", $MenuLanguage->MenuPhrase("125", "MenuText"), $MenuRelativePath . "billing_periodlist.php", -1, "", AllowListMenu('{F82056AB-CEC6-48BF-AA9B-76524AD406BC}billing_period'), FALSE, FALSE, "", "", TRUE);
 $sideMenu->addMenuItem(37, "mi_audittrail", $MenuLanguage->MenuPhrase("37", "MenuText"), $MenuRelativePath . "audittraillist.php", -1, "", AllowListMenu('{F82056AB-CEC6-48BF-AA9B-76524AD406BC}audittrail'), FALSE, FALSE, "", "", FALSE);
 echo $sideMenu->toScript();
-?>

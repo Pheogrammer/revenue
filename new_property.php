@@ -1,8 +1,8 @@
 <?php
 include 'db_connect.php';
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
 	$qry = $conn->query("SELECT * FROM classes where id={$_GET['id']}")->fetch_array();
-	foreach($qry as $k => $v){
+	foreach ($qry as $k => $v) {
 		$$k = $v;
 	}
 }
@@ -22,22 +22,22 @@ if(isset($_GET['id'])){
 	</form>
 </div>
 <script>
-	$(document).ready(function(){
-		$('#new_property').submit(function(e){
+	$(document).ready(function() {
+		$('#new_property').submit(function(e) {
 			e.preventDefault();
 			start_load()
 			$('#msg').html('')
 			$.ajax({
-				url:'ajax.php?action=save_class',
-				method:'POST',
-				data:$(this).serialize(),
-				success:function(resp){
-					if(resp == 1){
-						alert_toast("Data successfully saved.","success");
-						setTimeout(function(){
-							location.reload()	
-						},1750)
-					}else if(resp == 2){
+				url: 'ajax.php?action=save_class',
+				method: 'POST',
+				data: $(this).serialize(),
+				success: function(resp) {
+					if (resp == 1) {
+						alert_toast("Data successfully saved.", "success");
+						setTimeout(function() {
+							location.reload()
+						}, 1750)
+					} else if (resp == 2) {
 						$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Class already exist.</div>')
 						end_load()
 					}
@@ -45,5 +45,4 @@ if(isset($_GET['id'])){
 			})
 		})
 	})
-
 </script>
