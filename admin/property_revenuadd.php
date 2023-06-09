@@ -376,6 +376,13 @@ $property_revenu_add->showMessage();
 				</div>
 			</div>
 		<?php } ?>
+		<div id="r_date" class="form-group row">
+			<div class='col'>
+				<label class="<?php echo $property_revenu_add->LeftColumnClass ?>">Add Attachement</label>
+				<input class='' type='file' name='file' id='file' class='form-control' />
+
+			</div>
+		</div>
 		<?php if ($property_revenu_add->date->Visible) { // date 
 		?>
 			<div id="r_date" class="form-group row">
